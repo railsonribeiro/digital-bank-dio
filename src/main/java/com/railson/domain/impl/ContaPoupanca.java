@@ -27,9 +27,6 @@ public class ContaPoupanca extends Conta implements IPoupanca {
 
         int verificarSaldoSuficiente = BigDecimal.valueOf(valor).compareTo(getSaldoPoupanca());
         if (verificarSaldoSuficiente != 1) {
-            BigDecimal diferenca = BigDecimal.valueOf(valor).subtract(saldoPoupanca);
-            setSaldoPoupanca(BigDecimal.ZERO);
-            setSaldoAplicadoRendimento(getSaldoAplicadoRendimento().subtract(diferenca));
             setSaldoPoupanca(getSaldoPoupanca().subtract(BigDecimal.valueOf(valor)));
             return;
         }
@@ -62,7 +59,7 @@ public class ContaPoupanca extends Conta implements IPoupanca {
     @Override
     public void calcularRendimento() {
 
-        LocalDate dataAtual = LocalDate.of(2030, 12, 31); // TODO: RETIRAR
+        LocalDate dataAtual = LocalDate.now(); // TODO: RETIRAR
         Period periodo = Period.between(super.getDataAbertura(), dataAtual);
 
         int totalDias = periodo.getYears() * 365 + periodo.getMonths() * 30 + periodo.getDays();

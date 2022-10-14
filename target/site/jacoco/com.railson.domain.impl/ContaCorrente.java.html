@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ContaCorrente.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">digital-bank</a> &gt; <a href="index.source.html" class="el_package">com.railson.domain.impl</a> &gt; <span class="el_source">ContaCorrente.java</span></div><h1>ContaCorrente.java</h1><pre class="source lang-java linenums">package com.railson.domain.impl;
+
+import java.math.BigDecimal;
+
+import com.railson.domain.Conta;
+import com.railson.domain.IConta;
+import com.railson.exceptions.SaldoInsuficienteException;
+
+public class ContaCorrente extends Conta {
+    BigDecimal saldo;
+
+    public BigDecimal getSaldo() {
+<span class="fc" id="L13">        return saldo;</span>
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+<span class="fc" id="L17">        this.saldo = saldo;</span>
+<span class="fc" id="L18">    }</span>
+
+    public ContaCorrente(String nomeTitular, String cpf) {
+<span class="fc" id="L21">        super(nomeTitular, cpf);</span>
+<span class="fc" id="L22">        this.saldo = BigDecimal.ZERO;</span>
+
+<span class="fc" id="L24">    }</span>
+
+    @Override
+    public void depositar(double valor) {
+<span class="fc" id="L28">        this.setSaldo(this.getSaldo().add(BigDecimal.valueOf(valor)));</span>
+<span class="fc" id="L29">    }</span>
+
+    @Override
+    public void sacar(double valor) throws SaldoInsuficienteException {
+<span class="fc" id="L33">        int compararSaldos = BigDecimal.valueOf(valor).compareTo(this.getSaldo());</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (compararSaldos != 1) {</span>
+<span class="fc" id="L35">            this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)));</span>
+<span class="fc" id="L36">            return;</span>
+        }
+<span class="fc" id="L38">        throw new SaldoInsuficienteException(this.saldo, BigDecimal.valueOf(valor));</span>
+
+    }
+
+    @Override
+    public void transferir(double valor, IConta conta) throws SaldoInsuficienteException {
+
+<span class="fc" id="L45">        this.sacar(valor);</span>
+<span class="fc" id="L46">        conta.depositar(valor);</span>
+<span class="fc" id="L47">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Aplicacao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">digital-bank</a> &gt; <a href="index.source.html" class="el_package">com.railson</a> &gt; <span class="el_source">Aplicacao.java</span></div><h1>Aplicacao.java</h1><pre class="source lang-java linenums">package com.railson;
+
+import java.math.BigDecimal;
+
+import com.railson.domain.IAplicacao;
+import com.railson.domain.IConta;
+import com.railson.domain.IPoupanca;
+import com.railson.domain.impl.ContaPoupanca;
+import com.railson.exceptions.SaldoInsuficienteException;
+
+<span class="fc" id="L11">public class Aplicacao implements IAplicacao {</span>
+    public static void main(String[] args) throws SaldoInsuficienteException {
+        // REALIZAR AS OPERAÇÕES VIA INSTANCIA DA CLASSE APLICAÇÃO
+
+        // Aplicacao aplicacao = new Aplicacao();
+
+        // ContaPoupanca conta1 = new ContaPoupanca(null, null);
+        // ContaPoupanca conta2 = new ContaPoupanca(null, null);
+
+        // aplicacao.realizarDeposito(conta1, 100);
+
+        // aplicacao.realizarTransferencia(conta1, conta2, 60);
+
+        // BigDecimal expected1 = BigDecimal.valueOf(40);
+        // BigDecimal actual1 = conta1.getSaldoPoupanca();
+
+        // BigDecimal expected2 = BigDecimal.valueOf(60);
+        // BigDecimal actual2 = conta2.getSaldoPoupanca();
+
+        // System.out.println(expected1);
+        // System.out.println(actual1);
+
+<span class="nc" id="L33">    }</span>
+
+    @Override
+    public void realizarSaque(IConta conta, double valor) throws SaldoInsuficienteException {
+<span class="fc" id="L37">        conta.sacar(valor);</span>
+
+<span class="fc" id="L39">    }</span>
+
+    @Override
+    public void realizarDeposito(IConta conta, double valor) {
+<span class="fc" id="L43">        conta.depositar(valor);</span>
+
+<span class="fc" id="L45">    }</span>
+
+    @Override
+    public void realizarTransferencia(IConta contaOrigem, IConta contaDeposito, double valor)
+            throws SaldoInsuficienteException {
+<span class="fc" id="L50">        contaOrigem.transferir(valor, contaDeposito);</span>
+
+<span class="fc" id="L52">    }</span>
+
+    @Override
+    public void realizarAplicacaoPoupanca(IPoupanca conta, double valor) throws SaldoInsuficienteException {
+<span class="fc" id="L56">        conta.aplicarRendimento(valor);</span>
+
+<span class="fc" id="L58">    }</span>
+
+    @Override
+    public void realizarResgatePoupanca(IPoupanca conta, double valor) throws SaldoInsuficienteException {
+<span class="fc" id="L62">        conta.resgatarSaldoRendimento(valor);</span>
+
+<span class="fc" id="L64">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
